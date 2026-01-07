@@ -179,7 +179,7 @@ async def chatbot_text(client: Client, message: Message):
                 await client.send_chat_action(message.chat.id, ChatAction.TYPING)
                 # Get response from external API
                 user_name = message.from_user.first_name or "User"
-            response_text = await get_yuki_response(message.from_user.id, message.text, user_name, message)
+                response_text = await get_yuki_response(message.from_user.id, message.text, user_name, message)
                 await message.reply_text(response_text)
         if not message.reply_to_message.from_user.id == client.id:
             if message.sticker:
@@ -263,7 +263,7 @@ async def chatbot_sticker(client: Client, message: Message):
                 await client.send_chat_action(message.chat.id, ChatAction.TYPING)
                 # Get response from external API
                 user_name = message.from_user.first_name or "User"
-            response_text = await get_yuki_response(message.from_user.id, message.text, user_name, message)
+                response_text = await get_yuki_response(message.from_user.id, message.text, user_name, message)
                 await message.reply_text(response_text)
         # Keep learning functionality for replies to user messages
         if message.reply_to_message.from_user.id != client.id:
