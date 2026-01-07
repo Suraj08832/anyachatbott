@@ -9,7 +9,7 @@ from pyrogram import Client, filters
 from pyrogram.enums import ChatAction
 from pyrogram.types import InlineKeyboardMarkup, Message
 
-from config import MONGO_URL, OWNER_NAME, OWNER_USERNAME, GROUP_NAME, GROUP_LINK
+from config import MONGO_URL, OWNER_NAME, OWNER_USERNAME, GROUP_NAME, GROUP_LINK, STICKER
 from anyachatbot import AMBOT
 from anyachatbot.modules.helpers import CHATBOT_ON, is_admins
 
@@ -208,19 +208,7 @@ async def chatbot_sticker_handler(client: Client, message: Message):
     # Check if replying to bot's message - respond with sticker
     if message.reply_to_message:
         if message.reply_to_message.from_user.id == (await client.get_me()).id:
-            chatdb = MongoClient(MONGO_URL)
-            chatai = chatdb["Word"]["WordDb"]
-            
-            # Find stickers from DB
-            K = []
-            is_chat = chatai.find({"word": message.sticker.file_unique_id})
-            for x in is_chat:
-                if x.get("check") == "sticker":
-                    K.append(x["text"])
-            
-            if K:
-                hey = random.choice(K)
-                await message.reply_sticker(hey)
+            await message.reply_sticker(sticker=random.choice(STICKER))
             return
 
     # Check if "siya" or "anya" mentioned or bot tagged
@@ -236,25 +224,8 @@ async def chatbot_sticker_handler(client: Client, message: Message):
     except Exception:
         pass
 
-    # Respond with sticker from DB when user sends sticker
-    chatdb = MongoClient(MONGO_URL)
-    chatai = chatdb["Word"]["WordDb"]
-    
-    K = []
-    is_chat = chatai.find({"word": message.sticker.file_unique_id})
-    for x in is_chat:
-        if x.get("check") == "sticker":
-            K.append(x["text"])
-    
-    if K:
-        hey = random.choice(K)
-        await message.reply_sticker(hey)
-    else:
-        # If no sticker found in DB, send a text response
-        await client.send_chat_action(message.chat.id, ChatAction.TYPING)
-        user_name = message.from_user.first_name or "User"
-        response_text = await get_yuki_response(message.from_user.id, "sticker", user_name, message)
-        await message.reply_text(response_text)
+    # Respond with sticker from STICKER list when user sends sticker
+    await message.reply_sticker(sticker=random.choice(STICKER))
 
 
 @AMBOT.on_message(
@@ -309,40 +280,15 @@ async def chatbot_sticker(client: Client, message: Message):
     filters.sticker & filters.private & ~filters.bot,
 )
 async def chatbot_sticker_pvt_handler(client: Client, message: Message):
-    """Handle sticker messages in private - respond with sticker from DB"""
-    # Respond with sticker from DB when user sends sticker
-    chatdb = MongoClient(MONGO_URL)
-    chatai = chatdb["Word"]["WordDb"]
-    
+    """Handle sticker messages in private - respond with sticker from STICKER list"""
     # Check if replying to bot's message
     if message.reply_to_message:
         if message.reply_to_message.from_user.id == (await client.get_me()).id:
-            K = []
-            is_chat = chatai.find({"word": message.sticker.file_unique_id})
-            for x in is_chat:
-                if x.get("check") == "sticker":
-                    K.append(x["text"])
-            
-            if K:
-                hey = random.choice(K)
-                await message.reply_sticker(hey)
-                return
+            await message.reply_sticker(sticker=random.choice(STICKER))
+            return
 
-    K = []
-    is_chat = chatai.find({"word": message.sticker.file_unique_id})
-    for x in is_chat:
-        if x.get("check") == "sticker":
-            K.append(x["text"])
-    
-    if K:
-        hey = random.choice(K)
-        await message.reply_sticker(hey)
-    else:
-        # If no sticker found in DB, send a text response
-        await client.send_chat_action(message.chat.id, ChatAction.TYPING)
-        user_name = message.from_user.first_name or "User"
-        response_text = await get_yuki_response(message.from_user.id, "sticker", user_name, message)
-        await message.reply_text(response_text)
+    # Respond with sticker from STICKER list when user sends sticker
+    await message.reply_sticker(sticker=random.choice(STICKER))
 
 
 @AMBOT.on_message(
