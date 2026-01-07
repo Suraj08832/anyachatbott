@@ -145,15 +145,17 @@ async def chatbot_text(client: Client, message: Message):
     except Exception:
         pass
 
-    # Only respond if "siya" is mentioned
+    # Only respond if "siya" is mentioned or bot is tagged
     try:
-        if "siya" not in message.text.lower():
+        text_lower = message.text.lower()
+        # Check for "siya" mention or bot mention
+        bot_username = (await client.get_me()).username
+        has_siya = "siya" in text_lower
+        has_bot_mention = bot_username and f"@{bot_username.lower()}" in text_lower
+
+        if not (has_siya or has_bot_mention):
             return
     except Exception:
-        return
-
-    # Check if "siya" is mentioned, otherwise don't reply
-    if not message.text or "siya" not in message.text.lower():
         return
 
     chatdb = MongoClient(MONGO_URL)
@@ -232,15 +234,17 @@ async def chatbot_sticker(client: Client, message: Message):
     except Exception:
         pass
 
-    # Only respond if "siya" is mentioned
+    # Only respond if "siya" is mentioned or bot is tagged
     try:
-        if "siya" not in message.text.lower():
+        text_lower = message.text.lower()
+        # Check for "siya" mention or bot mention
+        bot_username = (await client.get_me()).username
+        has_siya = "siya" in text_lower
+        has_bot_mention = bot_username and f"@{bot_username.lower()}" in text_lower
+
+        if not (has_siya or has_bot_mention):
             return
     except Exception:
-        return
-
-    # Check if "siya" is mentioned, otherwise don't reply
-    if "siya" not in message.text.lower():
         return
 
     if not message.reply_to_message:
@@ -321,15 +325,17 @@ async def chatbot_pvt(client: Client, message: Message):
     except Exception:
         pass
 
-    # Only respond if "siya" is mentioned
+    # Only respond if "siya" is mentioned or bot is tagged
     try:
-        if "siya" not in message.text.lower():
+        text_lower = message.text.lower()
+        # Check for "siya" mention or bot mention
+        bot_username = (await client.get_me()).username
+        has_siya = "siya" in text_lower
+        has_bot_mention = bot_username and f"@{bot_username.lower()}" in text_lower
+
+        if not (has_siya or has_bot_mention):
             return
     except Exception:
-        return
-
-    # Check if "siya" is mentioned, otherwise don't reply
-    if "siya" not in message.text.lower():
         return
 
     if not message.reply_to_message:
@@ -365,15 +371,17 @@ async def chatbot_sticker_pvt(client: Client, message: Message):
     except Exception:
         pass
 
-    # Only respond if "siya" is mentioned
+    # Only respond if "siya" is mentioned or bot is tagged
     try:
-        if "siya" not in message.text.lower():
+        text_lower = message.text.lower()
+        # Check for "siya" mention or bot mention
+        bot_username = (await client.get_me()).username
+        has_siya = "siya" in text_lower
+        has_bot_mention = bot_username and f"@{bot_username.lower()}" in text_lower
+
+        if not (has_siya or has_bot_mention):
             return
     except Exception:
-        return
-
-    # Check if "siya" is mentioned, otherwise don't reply
-    if "siya" not in message.text.lower():
         return
 
     if not message.reply_to_message:
