@@ -325,19 +325,7 @@ async def chatbot_pvt(client: Client, message: Message):
     except Exception:
         pass
 
-    # Only respond if "siya" is mentioned or bot is tagged
-    try:
-        text_lower = message.text.lower()
-        # Check for "siya" mention or bot mention
-        bot_username = (await client.get_me()).username
-        has_siya = "siya" in text_lower
-        has_bot_mention = bot_username and f"@{bot_username.lower()}" in text_lower
-
-        if not (has_siya or has_bot_mention):
-            return
-    except Exception:
-        return
-
+    # In private chats, respond to ALL messages (no need for "siya" mention)
     if not message.reply_to_message:
         await client.send_chat_action(message.chat.id, ChatAction.TYPING)
         # Get response from external API
@@ -346,12 +334,12 @@ async def chatbot_pvt(client: Client, message: Message):
         await message.reply_text(response_text)
 
     if message.reply_to_message:
-        if message.reply_to_message.from_user.id == (await client.get_me()).id:
-            await client.send_chat_action(message.chat.id, ChatAction.TYPING)
-            # Get response from external API
-            user_name = message.from_user.first_name or "User"
-            response_text = await get_yuki_response(message.from_user.id, message.text, user_name, message)
-            await message.reply_text(response_text)
+        # Respond to replies in private chats
+        await client.send_chat_action(message.chat.id, ChatAction.TYPING)
+        # Get response from external API
+        user_name = message.from_user.first_name or "User"
+        response_text = await get_yuki_response(message.from_user.id, message.text, user_name, message)
+        await message.reply_text(response_text)
 
 
 # Sticker handling in private chats - simplified to only handle text replies to stickers
@@ -371,19 +359,7 @@ async def chatbot_sticker_pvt(client: Client, message: Message):
     except Exception:
         pass
 
-    # Only respond if "siya" is mentioned or bot is tagged
-    try:
-        text_lower = message.text.lower()
-        # Check for "siya" mention or bot mention
-        bot_username = (await client.get_me()).username
-        has_siya = "siya" in text_lower
-        has_bot_mention = bot_username and f"@{bot_username.lower()}" in text_lower
-
-        if not (has_siya or has_bot_mention):
-            return
-    except Exception:
-        return
-
+    # In private chats, respond to ALL messages (no need for "siya" mention)
     if not message.reply_to_message:
         await client.send_chat_action(message.chat.id, ChatAction.TYPING)
         # Get response from external API
@@ -392,9 +368,9 @@ async def chatbot_sticker_pvt(client: Client, message: Message):
         await message.reply_text(response_text)
 
     if message.reply_to_message:
-        if message.reply_to_message.from_user.id == (await client.get_me()).id:
-            await client.send_chat_action(message.chat.id, ChatAction.TYPING)
-            # Get response from external API
-            user_name = message.from_user.first_name or "User"
-            response_text = await get_yuki_response(message.from_user.id, message.text, user_name, message)
-            await message.reply_text(response_text)
+        # Respond to replies in private chats
+        await client.send_chat_action(message.chat.id, ChatAction.TYPING)
+        # Get response from external API
+        user_name = message.from_user.first_name or "User"
+        response_text = await get_yuki_response(message.from_user.id, message.text, user_name, message)
+        await message.reply_text(response_text)
