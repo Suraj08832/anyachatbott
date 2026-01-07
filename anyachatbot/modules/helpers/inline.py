@@ -1,7 +1,7 @@
 from pyrogram.types import InlineKeyboardButton
 
 from config import SUPPORT_GRP, UPDATE_CHNL
-from RAUSHAN import BOT_USERNAME, OWNER
+from anyachatbot import BOT_USERNAME, OWNER
 
 DEV_OP = [
     [

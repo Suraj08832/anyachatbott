@@ -1,4 +1,4 @@
-from RAUSHAN import db
+from anyachatbot import db
 
 usersdb = db.users
 

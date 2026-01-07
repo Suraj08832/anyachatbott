@@ -8,9 +8,9 @@ from pyrogram.types import Message
 from pyrogram import *
 from pyrogram.types import *
 from config import OWNER_ID
-from RAUSHAN import dev, OWNER
-from RAUSHAN.database.chats import get_served_chats
-from RAUSHAN.database.users import get_served_users
+from anyachatbot import dev, OWNER
+from anyachatbot.database.chats import get_served_chats
+from anyachatbot.database.users import get_served_users
 
 
 @dev.on_message(filters.command("stats") & filters.user(OWNER_ID))

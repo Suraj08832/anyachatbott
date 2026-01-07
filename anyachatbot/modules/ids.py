@@ -1,7 +1,7 @@
 from pyrogram import filters
 from pyrogram.enums import ParseMode
 
-from RAUSHAN import dev
+from anyachatbot import dev
 
 
 @dev.on_message(filters.command("id"))

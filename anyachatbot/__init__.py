@@ -9,7 +9,7 @@ from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
 from pyrogram import Client
 
 import config
-from RAUSHAN.modules import all_modules
+from anyachatbot.modules import all_modules
 
 logging.basicConfig(
     format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
@@ -36,7 +36,7 @@ class AMBOT(Client):
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             bot_token=config.BOT_TOKEN,
-            plugins=dict(root="RAUSHAN.modules"),
+            plugins=dict(root="anyachatbot.modules"),
         )
 
     async def start(self):
@@ -55,7 +55,7 @@ dev = Client(
     bot_token=config.BOT_TOKEN,
     api_id=config.API_ID,
     api_hash=config.API_HASH,
-    # plugins=dict(root="RAUSHAN.modules"),
+    # plugins=dict(root="anyachatbot.modules"),
 )
 
 dev.start()

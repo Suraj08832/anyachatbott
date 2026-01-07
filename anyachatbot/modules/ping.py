@@ -9,10 +9,10 @@ from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardMarkup, Message
 
 from config import IMG, OWNER_USERNAME, STICKER
-from RAUSHAN import BOT_NAME, dev
-from RAUSHAN.database.chats import add_served_chat
-from RAUSHAN.database.users import add_served_user
-from RAUSHAN.modules.helpers import PNG_BTN
+from anyachatbot import BOT_NAME, dev
+from anyachatbot.database.chats import add_served_chat
+from anyachatbot.database.users import add_served_user
+from anyachatbot.modules.helpers import PNG_BTN
 
 
 @dev.on_message(filters.command("ping", prefixes=["+", "/", "-", "?", "$", "&"]))

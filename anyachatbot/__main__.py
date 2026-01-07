@@ -1,6 +1,6 @@
 from flask import Flask
 import threading
-from RAUSHAN import LOGGER, AMBOT
+from anyachatbot import LOGGER, AMBOT
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ def run_flask():
     app.run(host="0.0.0.0", port=8000)
 
 def run_bot():
-    LOGGER.info("The PURVI CHAT BOT Started.")
+    LOGGER.info("The HEXANERVE CHAT BOT Started.")
     AMBOT().run()
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 {
-  "name": "𝐏ᴜʀᴠɪ 𝐂ʜᴀᴛ",
+  "name": "�𝗘𝗫𝗔𝗡𝗘𝗥𝗩𝗘 �𝗛𝗔𝗧 𝗕𝗢𝗧",
   "description": "A telegram bot",
   "logo": "https://telegra.ph/file/c319f8cffa722e5c4bb85.jpg",
   "keywords": [
@@ -11,7 +11,7 @@
     "buildpacks": [{
     "url": "heroku/python"
   }],
-  "repository": "https://github.com/TEAMPURVI/PURVI_CHAT",
+  "repository": "https://github.com/Suraj08832/anyachatbott",
   "env": {
     "API_ID": {
       "description": "Get this value from my.telegram.org/apps.",

@@ -1,13 +1,13 @@
 # Don't remove This Line From Here. Tg: @ll_ALPHA_BABY_lll
-# Github :-RAUSHAN
+# Github :-anyachatbot
 
 
 from pyrogram.enums import ChatMemberStatus as CMS
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup
 
-from RAUSHAN import AMBOT
-from RAUSHAN.database import vick
-from RAUSHAN.modules.helpers import (
+from anyachatbot import AMBOT
+from anyachatbot.database import vick
+from anyachatbot.modules.helpers import (
     ABOUT_BTN,
     ABOUT_READ,
     ADMIN_READ,
