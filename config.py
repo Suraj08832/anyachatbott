@@ -7,11 +7,14 @@ load_dotenv()
 API_ID = int(getenv("API_ID", "21803165"))
 API_HASH = getenv("API_HASH", "05e5e695feb30e25bef47484cc006da7")
 BOT_TOKEN = getenv("BOT_TOKEN", None)
-OWNER_ID = int(getenv("OWNER_ID", "7403621976"))
+OWNER_ID = int(getenv("OWNER_ID", "8018507161"))
 MONGO_URL = getenv("MONGO_URL", None)
 SUPPORT_GRP = getenv("SUPPORT_GRP", "hexanerve_group")
 UPDATE_CHNL = getenv("UPDATE_CHNL", "Hexanerve_core")
 OWNER_USERNAME = getenv("OWNER_USERNAME", "HEXANERVE")
+OWNER_NAME = getenv("OWNER_NAME", "HEXANERVE")
+GROUP_NAME = getenv("GROUP_NAME", "HEXANERVE GROUP")
+GROUP_LINK = getenv("GROUP_LINK", "https://t.me/hexanerve_group")
 
 # Random Start Images
 IMG = [
