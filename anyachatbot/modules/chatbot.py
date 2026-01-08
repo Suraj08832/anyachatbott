@@ -55,53 +55,87 @@ def get_system_prompt(date_time_str, user_name=""):
 
 # --- AI RESPONSE PROCESSOR ---
 def process_ai_response(raw_response: str) -> str:
-    """Process AI response to meet system requirements"""
+    """Process AI response to make it sound like a real girl chatting"""
     import re
+    import random
 
     # Remove any bot/AI references
-    bot_keywords = ['ai', 'bot', 'artificial intelligence', 'chatbot', 'assistant', 'machine', 'computer']
+    bot_keywords = ['ai', 'bot', 'artificial intelligence', 'chatbot', 'assistant', 'machine', 'computer', 'knowledge', 'enhanced', 'help', 'learning', 'processing']
     for keyword in bot_keywords:
         raw_response = re.sub(rf'\b{re.escape(keyword)}\b', '', raw_response, flags=re.IGNORECASE)
 
-    # Convert to hinglish (mix of hindi and english) - basic conversion
-    hinglish_replacements = {
-        'I am': 'main',
-        'I am': 'main hoon',
+    # Clean up extra spaces and weird characters
+    processed = re.sub(r'\s+', ' ', raw_response.strip())
+
+    # If response is too AI-like, replace with more natural girl responses
+    ai_indicators = ['enhancing', 'processing', 'analyzing', 'learning', 'data', 'algorithm', 'model', 'training']
+    if any(indicator in processed.lower() for indicator in ai_indicators) or len(processed.split()) > 15:
+        # Replace with casual girl responses
+        casual_responses = [
+            "bas aise hi time pass kar rhi thi 😊",
+            "bore ho rhi thi, baat karo na",
+            "netflix dekh rhi thi, acha laga",
+            "music sun rhi thi, tu bata kya kar rha",
+            "ghar pe hi hoon, tu bata",
+            "bas chill kar rhi, kuch plan hai?",
+            "friends ke saath chat kar rhi thi",
+            "reel dekh rhi thi instagram pe",
+            "kuch khana bana rhi thi",
+            "study kar rhi thi, boring hai yaar",
+            "phone scroll kar rhi thi",
+            "music playlist bana rhi thi",
+            "picture edit kar rhi thi",
+            "shopping dekh rhi online",
+            "coffee pi rhi thi"
+        ]
+        processed = random.choice(casual_responses)
+
+    # Convert to more natural hinglish that a girl would use
+    hinglish_conversions = {
+        'i am': 'main',
+        'i am': 'main toh',
         'you are': 'tu hai',
         'you are': 'tum ho',
-        'what': 'kya',
-        'how': 'kaise',
-        'why': 'kyu',
-        'where': 'kahan',
-        'when': 'kab',
-        'hello': 'namaste',
-        'hi': 'hi',
-        'bye': 'bye',
-        'good': 'acha',
-        'bad': 'bura',
-        'yes': 'haan',
-        'no': 'nahi',
-        'thank you': 'dhanyavaad',
-        'please': 'please',
-        'sorry': 'maaf karo',
-        'okay': 'thik hai',
-        'fine': 'theek',
-        'friend': 'dost'
+        'what are you': 'tu kya',
+        'what is': 'kya hai',
+        'how are': 'kaise hai',
+        'doing': 'kar rhi',
+        'nothing': 'kuch nahi',
+        'just': 'bas',
+        'watching': 'dekh rhi',
+        'listening': 'sun rhi',
+        'eating': 'kha rhi',
+        'thinking': 'soch rhi',
+        'talking': 'baat kar rhi',
+        'chatting': 'chat kar rhi',
+        'scrolling': 'scroll kar rhi',
+        'studying': 'padh rhi',
+        'working': 'kaam kar rhi',
+        'playing': 'khel rhi',
+        'sleeping': 'so rhi',
+        'cooking': 'khana bana rhi',
+        'dancing': 'dance kar rhi',
+        'singing': 'gaana ga rhi',
+        'reading': 'padh rhi'
     }
 
-    processed = raw_response
-    for eng, hin in hinglish_replacements.items():
+    for eng, hin in hinglish_conversions.items():
         processed = re.sub(rf'\b{re.escape(eng)}\b', hin, processed, flags=re.IGNORECASE)
 
-    # Limit to maximum 20 words
-    words = processed.split()[:20]
+    # Make it more casual and girl-like
+    if not processed.endswith('?') and not processed.endswith('!'):
+        casual_endings = ['yaar', 'na', 'bhai', 're', 'hai', 'thi', 'hoon']
+        if random.choice([True, False]) and len(processed.split()) < 10:
+            processed += ' ' + random.choice(casual_endings)
+
+    # Limit to maximum 15 words (made it stricter for more natural feel)
+    words = processed.split()[:15]
     processed = ' '.join(words)
 
-    # Add a random emoji at the end (not always, just sometimes as per system prompt)
-    import random
-    emojis = ['😊', '🤣', '🤓', '😁', '😆', '😉', '😂', '🥲', '🙄', '🤗', '🫠', '👻', '😅', '🌝', '😋', '🤭', '🤔', '🧐']
+    # Add emoji sometimes (30% chance)
+    emojis = ['😊', '🤣', '😉', '😂', '🥲', '🤭', '😋', '🙄', '🤗', '😅', '🌝', '😁', '🤔']
 
-    if random.choice([True, False]):  # 50% chance to add emoji
+    if random.random() < 0.3:  # 30% chance
         processed += ' ' + random.choice(emojis)
 
     return processed.strip()
