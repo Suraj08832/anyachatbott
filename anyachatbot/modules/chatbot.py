@@ -141,9 +141,9 @@ def process_ai_response(raw_response: str) -> str:
     return processed.strip()
 
 async def get_chatbot_response(prompt: str, system_context: str = "", history: str = "") -> str:
-    """Get response from external chatbot API with simplified prompt"""
+    """Get response from external chatbot API directly"""
     try:
-        # Just send the user prompt directly to get a clean response
+        # Just send the user prompt directly to get response from API
         from urllib.parse import quote
         encoded_prompt = quote(prompt)
         url = f"https://zefronapi22.vrajiv830.workers.dev/?prompt={encoded_prompt}"
@@ -152,11 +152,8 @@ async def get_chatbot_response(prompt: str, system_context: str = "", history: s
             async with session.get(url) as response:
                 if response.status == 200:
                     data = await response.json()
-                    raw_response = data.get("response", "Sorry, I couldn't generate a response.")
-
-                    # Process the response to meet system requirements
-                    processed_response = process_ai_response(raw_response)
-                    return processed_response
+                    # Return the raw API response directly
+                    return data.get("response", "Sorry, I couldn't generate a response.")
                 else:
                     return "Sorry, the chatbot service is currently unavailable."
     except Exception as e:
